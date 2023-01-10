@@ -1,6 +1,6 @@
 %% This code compares the modes derived from the complex with the
 % allosteric modes of the monomer.
-%% 
+%% Initialize
 clear all: clc: close all:
 monomodeset=[1 3];
 monof='1OMP'; % apo structure 
