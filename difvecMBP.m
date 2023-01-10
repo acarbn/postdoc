@@ -1,3 +1,6 @@
+%% This code compares GNM modes with the dif vector between two states of a protein
+% and plot the overlaps.
+%%
 clear all; clc;close all;
 addpath '/Users/acarb/Dropbox (The Francis Crick)/DeBenedictisE/burcin/crick_biodesign/postdoc/trymatlab'
 %%Input Data
