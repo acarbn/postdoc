@@ -12,3 +12,6 @@ complexf2='3OSR';
 
 % merge 173 & 427 for 3OSQ
 % merge 311 & 564 for 3OSR 
+
+[MSFc1,resnum]=GNM(complexf1,1,10,'A');
+[MSFc2,resnum]=GNM(complexf2,1,10,'A');
