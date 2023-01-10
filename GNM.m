@@ -72,18 +72,19 @@ end
         
 	
 % gnmCfile = fopen('GNM_MSF','a');
-invcont=zeros(resnum,resnum);
+invcont=zeros(resnum,resnum,mode_max);
 %for kk=resnum-mode_max:resnum-mode_beg
    for kk=[resnum-mode_max resnum-mode_beg] 
     for j=1:resnum
         for i=1:resnum
-            invcont(i,j)=invcont(i,j)+U(i,kk)*U(j,kk)/w(kk);
+            invcont(i,j,kk)=invcont(i,j,kk)+U(i,kk)*U(j,kk)/w(kk);
         end
     end
-end
+   MSF(kk)=diag(invcont(:,:,kk);
+   MSF(kk)=MSF(kk)./trapz(MSF(kk)); 
+   end
 
-MSF=diag(invcont);
-MSF=MSF./trapz(MSF);
+
 end
 
 
