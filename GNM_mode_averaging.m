@@ -77,7 +77,7 @@ invcont=zeros(resnum,resnum,mode_max);
 for kk=[resnum-mode_max resnum-mode_beg] 
     for j=1:resnum
         for i=1:resnum
-            invcont(i,j)=invcont(i,j,resnum-kk)+U(i,kk)*U(j,kk)/w(kk);
+            invcont(i,j)=invcont(i,j)+U(i,kk)*U(j,kk)/w(kk);
         end
     end
     MSF(resnum-kk,:)=diag(invcont(:,:,resnum-kk));
