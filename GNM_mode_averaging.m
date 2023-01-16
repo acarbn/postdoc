@@ -72,7 +72,7 @@ end
         
 	
 % gnmCfile = fopen('GNM_MSF','a');
-invcont=zeros(resnum,resnum,mode_max);
+invcont=zeros(resnum,resnum);
 %for kk=resnum-mode_max:resnum-mode_beg
 for kk=[resnum-mode_max resnum-mode_beg] 
     for j=1:resnum
