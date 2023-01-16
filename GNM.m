@@ -1,4 +1,4 @@
-function [MSF,resnum]=GNM(fname1,mode_beg,mode_max,chain)
+function [MSFind,MSFavg,resnum]=GNM(fname1,mode_set,chain)
 
 rcut_gnm=7.3;
 % gamma constant
@@ -24,10 +24,10 @@ for i=1:atomnum
 end
 
 resnum=length(x);
-if mode_beg<0 && mode_max<0
-    mode_beg=resnum+mode_beg;
-    mode_max=resnum+mode_max;
-end
+% if mode_beg<0 && mode_max<0
+%     mode_beg=resnum+mode_beg;
+%     mode_max=resnum+mode_max;
+% end
 
 
 for j=1:resnum
@@ -61,29 +61,21 @@ end
         [U(:,:),S(:,:),V(:,:)]=svd(cont(:,:));
         w=diag(S(:,:));        
         
-%         
-%         % GNM 10 slow eigenvectors and slow modes
-%         for j=resnum-1:-1:resnum-mode_max
-%             for i=1:resnum
-%                 slow_vectors_gnm(i,j)=V(i,j);
-%                 slow_modes_gnm(i,j)=V(i,j)*V(i,j);
-%             end
-%         end
-        
-	
-% gnmCfile = fopen('GNM_MSF','a');
-invcont=zeros(resnum,resnum,mode_max);
-for kk=resnum-mode_max:resnum-mode_beg
+invcont=zeros(resnum,resnum,max(mode_set));
+invcontav=zeros(resnum,resnum);
+
+for kk=resnum-mode_set
 %for kk=[resnum-mode_max resnum-mode_beg] 
     for j=1:resnum
         for i=1:resnum
             invcont(i,j,resnum-kk)=invcont(i,j,resnum-kk)+U(i,kk)*U(j,kk)/w(kk);
+            invcontav(i,j)=invcont(i,j)+U(i,kk)*U(j,kk)/w(kk);
         end
     end
     MSF(resnum-kk,:)=diag(invcont(:,:,resnum-kk));
-   MSF(resnum-kk,:)=MSF(resnum-kk,:)./trapz(MSF(resnum-kk,:)); 
+    MSFind(resnum-kk,:)=MSF(resnum-kk,:)./trapz(MSF(resnum-kk,:)); 
 end
-
+MSFavg=diag(invcontav)./trapz(diag(invcontav));
 
 end
 
