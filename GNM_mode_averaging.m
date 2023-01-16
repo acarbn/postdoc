@@ -80,8 +80,8 @@ for kk=[resnum-mode_max resnum-mode_beg]
             invcont(i,j)=invcont(i,j)+U(i,kk)*U(j,kk)/w(kk);
         end
     end
-    MSF(resnum-kk,:)=diag(invcont(:,:,resnum-kk));
-   MSF(resnum-kk,:)=MSF(resnum-kk,:)./trapz(MSF(resnum-kk,:)); 
+    MSF=diag(invcont);
+   MSF=MSF./trapz(MSF); 
 end
 
 
