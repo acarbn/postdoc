@@ -1,15 +1,11 @@
-function [resnum,ndvs]=difvecPDB(fname1,chain1,fname2,chain2)
+function [resnum,ndvs,dvs]=difvecPDB(fname1,chain1,fname2,chain2)
 % fnames 1 and 2 are PDB codes
 % and chains 1 and 2 are the corresponding protein chains
-% fname1='1ANF';
-% fname2='3OSQ';
-% chain1='A';
-% chain2='A';
-
 f1=getpdb(fname1);
 f2=getpdb(fname2);
-
-
+[Dist, RMSD, Transf, PDB2TX] = pdbsuperpose(f1, f2);
+clear f2
+f2=PDB2TX;
 atom1=length(f1.Model.Atom);
 atom2=length(f2.Model.Atom);
 count=0;
@@ -33,11 +29,10 @@ for i=1:atom2
             x(count2,2)=f2.Model(1).Atom(i).X;
             y(count2,2)=f2.Model(1).Atom(i).Y;
             z(count2,2)=f2.Model(1).Atom(i).Z;
-             sq2=f2.Model(1).Atom(i).resName;
+            sq2=f2.Model(1).Atom(i).resName;
             sq12(count2,1)=aminolookup(sq2);
     end
 end
-
 
 if count==count2
     X=x(:,2)-x(:,1);
@@ -83,8 +78,6 @@ else
     end   
        
      dvs=ird;
-
-
 end
     
 ndvs=dvs/trapz(dvs);

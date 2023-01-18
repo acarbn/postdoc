@@ -3,7 +3,7 @@
 %% Initialize
 clear all; clc; close all;
 set(0,'DefaultFigureWindowStyle','docked')
-monomodeset=[1 3];
+monomodeset=[1 7];
 monof='1OMP'; % apo structure 
 complexf1='3OSQ';
 complexf2='3OSR';
@@ -44,7 +44,7 @@ MSFc2mavg=MSFavg([5:311+4 561-17-3+4:resnum3]);
 figure(40)
 plot(2:369,MSFavgm(2:369),'LineWidth',3)
 hold on
-plot(2:369,MSFc1mavg,'LineWidth',3)
+plot(2:369,MSFc1mavg./trapz(MSFc1mavg),'LineWidth',3)
 set(gca,'FontSize',24)
 xlabel('Residue Number')
 grid on
@@ -56,7 +56,7 @@ title('3OSQ')
 figure(41)
 plot(1:370,MSFavgm(1:370),'LineWidth',3)
 hold on
-plot(1:370,MSFc2mavg,'LineWidth',3)
+plot(1:370,MSFc2mavg./trapz(MSFc2mavg),'LineWidth',3)
 set(gca,'FontSize',24)
 xlabel('Residue Number')
 grid on
@@ -68,7 +68,7 @@ title('3OSR')
 figure(1)
 plot(2:369,MSF1(2:369),'LineWidth',3)
 hold on
-plot(2:369,MSFc1m(j11,:),'LineWidth',3)
+plot(2:369,MSFc1m(j11,:)./trapz(MSFc1m(j11,:)),'LineWidth',3)
 set(gca,'FontSize',24)
 xlabel('Residue Number')
 grid on
@@ -80,7 +80,7 @@ title('GNM Mode',j11)
 figure(2)
 plot(2:369,MSF2(2:369),'LineWidth',3)
 hold on
-plot(2:369,MSFc1m(j13,:),'LineWidth',3)
+plot(2:369,MSFc1m(j13,:)./trapz(MSFc1m(j13,:)),'LineWidth',3)
 set(gca,'FontSize',24)
 xlabel('Residue Number')
 grid on
@@ -92,7 +92,7 @@ title('GNM Mode',j13)
 figure(3)
 plot(1:370,MSF1,'LineWidth',3)
 hold on
-plot(1:370,MSFc2m(j21,:),'LineWidth',3)
+plot(1:370,MSFc2m(j21,:)./trapz(MSFc2m(j21,:)),'LineWidth',3)
 set(gca,'FontSize',24)
 xlabel('Residue Number')
 grid on
@@ -104,7 +104,7 @@ title('GNM Mode',j21)
 figure(4)
 plot(1:370,MSF2,'LineWidth',3)
 hold on
-plot(1:370,MSFc2m(j23,:),'LineWidth',3)
+plot(1:370,MSFc2m(j23,:)./trapz(MSFc2m(j23,:)),'LineWidth',3)
 set(gca,'FontSize',24)
 xlabel('Residue Number')
 grid on

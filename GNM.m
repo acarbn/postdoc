@@ -1,6 +1,6 @@
 function [MSFind,MSFavg,resnum]=GNM(fname1,mode_set,chain)
 
-rcut_gnm=7.3;
+rcut_gnm=7;
 % gamma constant
 ga=1;
 try
@@ -64,19 +64,26 @@ end
 invcont=zeros(resnum,resnum,max(mode_set));
 invcontav=zeros(resnum,resnum);
 
-for kk=resnum-mode_set
+for k=resnum-mode_set
 %for kk=[resnum-mode_max resnum-mode_beg] 
     for j=1:resnum
         for i=1:resnum
-            invcont(i,j,resnum-kk)=invcont(i,j,resnum-kk)+U(i,kk)*U(j,kk)/w(kk);
-            invcontav(i,j)=invcont(i,j)+U(i,kk)*U(j,kk)/w(kk);
+            invcont(i,j,resnum-k)=invcont(i,j,resnum-k)+U(i,k)*U(j,k)/w(k);
+            invcontav(i,j)=invcontav(i,j)+U(i,k)*U(j,k)/w(k);
         end
     end
-    MSF(resnum-kk,:)=diag(invcont(:,:,resnum-kk));
-    MSFind(resnum-kk,:)=MSF(resnum-kk,:)./trapz(MSF(resnum-kk,:)); 
+    MSF(resnum-k,:)=diag(invcont(:,:,resnum-k));
+    MSFind(resnum-k,:)=MSF(resnum-k,:)./trapz(MSF(resnum-k,:)); 
 end
-MSFavg=diag(invcontav)./trapz(diag(invcontav));
-
+MSFavg=diag(invcontav)/trapz(diag(invcontav));
+w
+figure(365)
+plot(resnum-1:-1:0,w,'LineWidth',3,'Color','k')
+grid on
+axis square
+set(gca,'FontSize',24)
+xlabel('Mode Number')
+ylabel('Eigenvalue')
 end
 
 
