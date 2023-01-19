@@ -4,7 +4,8 @@
 clear all; clc; close all;
 set(0,'DefaultFigureWindowStyle','docked')
 monomodeset=[1 7];
-monof='1OMP'; % apo structure 
+%monof='1OMP'; % apo structure 
+monof='1ANF';
 complexf1='3OSQ';
 complexf2='3OSR';
 

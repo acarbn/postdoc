@@ -1,6 +1,6 @@
 function [cross,resnum]=GNMcross(fname1,modeset,chain)
 
-rcut_gnm=7.3;
+rcut_gnm=7;
 ga=1; % spring constant
 try
 prot=pdbread(fname1);

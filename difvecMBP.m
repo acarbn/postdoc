@@ -5,8 +5,8 @@ clear all; clc;close all;
 %addpath '/Users/acarb/Dropbox (The Francis Crick)/DeBenedictisE/burcin/crick_biodesign/postdoc/trymatlab'
 addpath '/Users/burcinacar/Dropbox (The Francis Crick)/DeBenedictisE/burcin/crick_biodesign/postdoc/trymatlab'
 %%Input Data
-fname1='1OMP';
-fname2='1ANF';
+fname2='1OMP';
+fname1='1ANF';
 chain1='A';
 chain2='A';
 
@@ -40,7 +40,7 @@ MSFa=zeros(mode_max-mode_beg+1,resnum);
 [MSFl,MSF2,resnum2]=GNM(fname2,[mode_beg:mode_max],chain2);
 
 for kk=resnum-mode_max:resnum-mode_beg
-    [dummy,MSF,resnum]=GNM(fname1,[resnum-kk],chain1);
+    [dummy,MSF,resnum]=GNM(fname1,[1 resnum-kk],chain1);
     MSFa(resnum-kk,:)=dummy(resnum-kk,:);
     MSFf=filter(b,a,MSF);
 
