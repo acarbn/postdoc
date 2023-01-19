@@ -1,4 +1,4 @@
-function [resnum,ndvs,dvs]=difvecPDB(fname1,chain1,fname2,chain2)
+function [resnum,ndvs,dvs,MSF1f,MSF2f]=difvecPDB(fname1,chain1,fname2,chain2)
 % fnames 1 and 2 are PDB codes
 % and chains 1 and 2 are the corresponding protein chains
 f1=getpdb(fname1);
@@ -10,6 +10,9 @@ atom1=length(f1.Model.Atom);
 atom2=length(f2.Model.Atom);
 count=0;
 count2=0;
+
+[MSF1i,MSF1a,resnum]=GNM(fname1,[1:10],chain1);
+[MSF2i,MSF2a,resnum2]=GNM(fname2,[1:10],chain2);
 
 for i=1:atom1
     if strcmp(chain1,f1.Model(1).Atom(i).chainID) && ...
@@ -45,19 +48,32 @@ else
     irdn=[strcat(sq12)];
     [Score, Alignment] =nwalign(rdn',irdn')
     xa=zeros(length(Alignment),2);
+    for k=1:10
+        MSF1f(k,:)=zeros(1,length(Alignment));
+        MSF2f(k,:)=zeros(1,length(Alignment));
+    end
     ya=xa; za=xa;
     for j=1:2
         count3=0;
+    
         for i=1:length(Alignment)
            if strcmp(Alignment(2*j-1,i),'-')==0
                count3=count3+1;
                xa(i,j)=x(count3,j);
                ya(i,j)=y(count3,j);
                za(i,j)=z(count3,j);
+               for k=1:10
+                   if j==1
+                       MSF1f(k,i)=MSF1i(k,count3);
+                   else
+                       MSF2f(k,i)=MSF2i(k,count3);
+                   end
+               end
            end
         end
     end
        
+    
     [ix,jx]=find(~xa);
     [iy,jy]=find(~ya);
     [iz,jz]=find(~za);

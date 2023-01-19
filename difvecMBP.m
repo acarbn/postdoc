@@ -5,13 +5,20 @@ clear all; clc;close all;
 %addpath '/Users/acarb/Dropbox (The Francis Crick)/DeBenedictisE/burcin/crick_biodesign/postdoc/trymatlab'
 addpath '/Users/burcinacar/Dropbox (The Francis Crick)/DeBenedictisE/burcin/crick_biodesign/postdoc/trymatlab'
 %%Input Data
-fname2='1OMP';
-fname1='1ANF';
+fname2='1ANF';
+fname1='1EU8';
 chain1='A';
 chain2='A';
+mode_max=10;
+mode_beg=1;
 
 %% Calculate Dif Vec
-[resnum,ndvs,dvs]=difvecPDB(fname1,chain1,fname2,chain2);
+[resnum,ndvs,dvs,MSF1f,MSF2f]=difvecPDB(fname1,chain1,fname2,chain2);
+for i=1:10
+    for j=1:10
+    ov2(i,j)=dot(MSF1f(i,:),MSF2f(j,:))/(norm(MSF1f(i,:))*norm(MSF2f(j,:)));
+    end
+end
 close all
 % Plot dif vec
 plot(dvs,'LineWidth',3,'Color','k')
@@ -23,8 +30,7 @@ xlabel('Residue Number')
 ylabel('Position Change (Angstrom)')
 close all
 
-mode_max=10;
-mode_beg=1;
+
 
 % Smooth data
 windowSize = 1; 
@@ -78,9 +84,9 @@ axis square
 %colormap jet
 % Create axes
 % Create ylabel
-ylabel('Apo');
+ylabel('GLC-bound');
 % Create xlabel
-xlabel('GLC-bound');
+xlabel('Apo');
 % Uncomment the following line to preserve the X-limits of the axes
 % xlim(axes1,[0.5 10.5]);
 % Uncomment the following line to preserve the Y-limits of the axes
