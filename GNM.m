@@ -12,7 +12,7 @@ end
 atomnum=size(prot.Model.Atom,2);
 count=0;
 for i=1:atomnum
-	if contains(prot.Model.Atom(i).AtomName,'CA')==1 && contains(prot.Model.Atom(i).chainID,chain)==1
+	if contains(prot.Model.Atom(i).AtomName,'CA')==1 && contains(chain,prot.Model.Atom(i).chainID)==1
         if isempty(prot.Model(1).Atom(i).altLoc) || ...
                         strcmpi(prot.Model(1).Atom(i).altLoc,'A')
 	count=count+1;

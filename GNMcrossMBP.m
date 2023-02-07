@@ -60,7 +60,7 @@ end
 %%
     
 hinges=unique(hinge);
-hingetxt=strcat('hinges',int2str(modeset),'.txt');
+hingetxt=strcat('hingestry',int2str(modeset),'.txt');
 fid=fopen(hingetxt,'wt');
 fprintf(fid,' %d',hinges)
 fclose(fid);
